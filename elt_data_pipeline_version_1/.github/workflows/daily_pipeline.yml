@@ -28,12 +28,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       # C. Install dbt and DuckDB
       - name: Install dependencies
         run: |
-          pip install dbt-duckdb
+          pip install dbt-duckdb>=1.8.1 duckdb==1.1.2
 
       # D. Run the Pipeline!
       #    --profiles-dir . tells dbt to look for profiles.yml in the CURRENT folder
