@@ -1,15 +1,12 @@
 name: Daily ELT Pipeline
 
 # 1. WHEN to run:
-#    - At 6:00 AM UTC every day
-#    - OR when you click the "Run" button manually
 on:
   schedule:
-    - cron: '0 6 * * *'
-  workflow_dispatch:
+    - cron: '0 6 * * *'  # 6:00 AM UTC every day
+  workflow_dispatch:      # Allows manual trigger
 
 # 2. THE SETUP:
-#    Pass the secure keys from GitHub Secrets into the machine's memory
 env:
   MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
   GCP_ACCESS_KEY: ${{ secrets.GCP_ACCESS_KEY }}
@@ -18,6 +15,12 @@ env:
 jobs:
   run_dbt_job:
     runs-on: ubuntu-latest
+
+  
+    # This tells the robot: "Do all work inside this specific subfolder"
+    defaults:
+      run:
+        working-directory: ./elt_data_pipeline_version_1
 
     steps:
       # A. Download your code
@@ -30,13 +33,12 @@ jobs:
         with:
           python-version: '3.11'
 
-      # C. Install dbt and DuckDB
+      # C. Install dbt and DuckDB (Specific versions as requested)
       - name: Install dependencies
         run: |
           pip install dbt-duckdb>=1.8.1 duckdb==1.1.2
 
-      # D. Run the Pipeline!
-      #    --profiles-dir . tells dbt to look for profiles.yml in the CURRENT folder
+      # D. Run the Pipeline
       - name: Run dbt
         run: |
           dbt deps
