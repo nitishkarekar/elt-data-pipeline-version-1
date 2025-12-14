@@ -1,7 +1,5 @@
-{{ config(
-    materialized='table',
-    pre_hook="{{ setup_gcp_secret() }}"
-) }}
+
+{{ config(materialized='table') }}
 
 SELECT 
     *,
