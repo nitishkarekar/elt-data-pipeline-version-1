@@ -33,7 +33,7 @@ query = """
         electric_range, 
         city, 
         state 
-    FROM test_data
+    FROM ev_analytics.data_1
 """
 df = conn.sql(query).df()
 
