@@ -37,7 +37,7 @@ query = """
 """
 df = conn.sql(query).df()
 df['model_year'] = pd.to_numeric(df['model_year'], errors='coerce').fillna(0).astype(int)
-f['electric_range'] = pd.to_numeric(df['electric_range'], errors='coerce').fillna(0).astype(int)
+df['electric_range'] = pd.to_numeric(df['electric_range'], errors='coerce').fillna(0).astype(int)
 
 # 4. Top Key Metrics (The "Scoreboard")
 col1, col2, col3, col4 = st.columns(4)
