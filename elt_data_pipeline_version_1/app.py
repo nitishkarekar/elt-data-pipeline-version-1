@@ -36,6 +36,7 @@ query = """
     FROM ev_analytics.data_1
 """
 df = conn.sql(query).df()
+df['model_year'] = pd.to_numeric(df['model_year'], errors='coerce').fillna(0).astype(int)
 
 # 4. Top Key Metrics (The "Scoreboard")
 col1, col2, col3, col4 = st.columns(4)
