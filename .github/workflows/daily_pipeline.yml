@@ -16,27 +16,25 @@ jobs:
   run_dbt_job:
     runs-on: ubuntu-latest
 
-  
-    # This tells the robot: "Do all work inside this specific subfolder"
+    # Tell the robot to work inside your project subfolder
     defaults:
       run:
         working-directory: ./elt_data_pipeline_version_1
 
     steps:
-      # A. Download your code
       - name: Check out code
         uses: actions/checkout@v3
 
-      # B. Install Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      # C. Install dbt and DuckDB (Specific versions as requested)
+      # C. Install dbt, DuckDB, AND the Filesystem libraries
       - name: Install dependencies
         run: |
-          pip install dbt-duckdb>=1.8.1 duckdb==1.1.2
+          # fsspec, s3fs, and gcsfs are required for cloud storage connections
+          pip install dbt-duckdb>=1.8.1 duckdb==1.1.2 fsspec s3fs gcsfs
 
       # D. Run the Pipeline
       - name: Run dbt
