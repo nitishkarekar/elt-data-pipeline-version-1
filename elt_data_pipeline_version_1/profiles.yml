@@ -1,0 +1,19 @@
+
+
+elt_data_pipeline_version_1:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # "md:" tells it to connect to MotherDuck Cloud
+      # We name the cloud database "stock_analytics" (or whatever you prefer)
+      path: 'md:ev_analytics' 
+      
+      # Paste your long MotherDuck token here
+      token: "{{ env_var('MOTHERDUCK_TOKEN') }}"
+
+      # Keep these settings to help read the Google Cloud files
+      filesystems:
+        - fs: gcs
+          token: 'gcp_key.json'
+          project: 'your-gcp-project-id' # Optional but good to keep

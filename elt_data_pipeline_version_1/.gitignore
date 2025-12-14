@@ -1,4 +1,28 @@
+# --- Secrets (NEVER UPLOAD THESE) ---
+gcp_key.json
+*.json
+.env
+env.ps1
 
+# --- dbt Internals (Temporary Build Files) ---
 target/
 dbt_packages/
 logs/
+
+
+# --- Database Files (Local Data) ---
+*.duckdb
+*.duckdb.wal
+*.tmp
+
+# --- Python Junk ---
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# --- OS Junk ---
+.DS_Store
+Thumbs.db
+logs/
+dbt.log
